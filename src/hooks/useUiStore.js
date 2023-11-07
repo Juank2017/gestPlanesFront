@@ -4,6 +4,7 @@ import { onChangeValues, onCloseDialogEditar, onCloseSnackBar, onOpenDialogBorra
 
 
 export const useUiStore = ()=>{
+
     const { isSnackBarOpen,mensajeSnackBar} = useSelector(state => state.ui);
     const { valueEditar}= useSelector(state=>state.users);
     const dispatch= useDispatch();

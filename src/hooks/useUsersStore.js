@@ -3,13 +3,16 @@ import {
   onStartLoading,
   onUsersLoaded,
 } from "../store/slices/usersSlice/usersSlice";
-import { planesAPI } from "../API/planesAPI";
+
 import { useCallback, useState } from "react";
 
 import { useAuthStore } from "./useAuthStore";
 import { useUiStore } from "./useUiStore";
 
+import { planesAPI } from "../API/planesAPI";
+
 export const useUsersStore = () => {
+
   const { isLoading, usuarios, roles, usuarioActual, mensaje } = useSelector(
     (state) => state.users
   );

@@ -4,7 +4,10 @@ import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/slice
 
 import { planesAPI } from "../API/planesAPI";
 
+
+
 export const useAuthStore = () => {
+
   const { status, user, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   let rolesUsuario = [];
@@ -13,7 +16,8 @@ export const useAuthStore = () => {
     try {
       const { data } = await planesAPI.post("/login", { userName, password });
       localStorage.setItem("token", data.token);
-      localStorage.setItem("refreshTtoken", data.refreshToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      sessionStorage.setItem("refreshTtoken", data.refreshToken);
       localStorage.setItem("token-init-date", new Date().getTime());
 
       data.roles.forEach((rol) => {
