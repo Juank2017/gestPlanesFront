@@ -117,9 +117,7 @@ export const useUsersStore = () => {
     try {
     console.log(token);
       const respuesta = await planesAPI
-        .put('/actualizaUsuario',values, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
+        .put('/actualizaUsuario',values, )
         .then((datos) => {
           console.log("llega aqui");
           console.log(datos);
@@ -138,21 +136,21 @@ export const useUsersStore = () => {
       console.log(error);
       const response = error.response.data;
 
-      if (
-        response.estado === "UNAUTHORIZED" ||
-        response.estado === "FORBIDDEN"
-      ) {
-        const refreshToken = localStorage.getItem("refreshTtoken");
-        console.log(refreshToken);
-        const { data } = await planesAPI.post("/refreshtoken", {
-          refreshToken,
-        });
-        if (data.mensaje.includes("no se encuentra")) {
-          startLogout();
-        }
-        console.log(data);
-        localStorage.setItem("token", data.token);
-      }
+      // if (
+      //   response.estado === "UNAUTHORIZED" ||
+      //   response.estado === "FORBIDDEN"
+      // ) {
+      //   const refreshToken = localStorage.getItem("refreshTtoken");
+      //   console.log(refreshToken);
+      //   const { data } = await planesAPI.post("/refreshtoken", {
+      //     refreshToken,
+      //   });
+      //   if (data.mensaje.includes("no se encuentra")) {
+      //     startLogout();
+      //   }
+      //   console.log(data);
+      //   localStorage.setItem("token", data.token);
+      // }
     }
   }
 
