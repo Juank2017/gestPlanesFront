@@ -30,7 +30,7 @@ export const uiSlice = createSlice({
             state.isSnackBarOpen= false;
             state.mensajeSnackBar = "";
             state.isDialogEditarOpen= true;
-            state.valueEditar= payload.valueEditar;
+            state.valueEditar= payload;
 
         },
         onCloseDialogEditar:(state)=>{

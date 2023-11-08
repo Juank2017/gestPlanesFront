@@ -7,6 +7,7 @@ export const usersSlice = createSlice({
     usuarios: {},
     roles: [],
     usuarioActual: {
+      id:"",
       userName: "",
       enabled: false,
       rol: "",
@@ -37,10 +38,15 @@ export const usersSlice = createSlice({
         };
         state.mensaje= payload.payload.mensaje;
     },
+    onStartFetchUser:(state)=>{
+      state.isLoading = true;
+      // state.usuarios = payload.usuarios;
+      // state.usuarioActual = payload.usuarioActual;
+    },
     onSelectUser:(state, { payload })=>{
+        console.log(payload)
         state.isLoading = false;
-        state.usuarios = payload.usuarios;
-        state.usuarioActual = payload.usuarioActual;
+        state.usuarioActual = payload;
     },
     onDeleteUser:(state,{ payload})=>{
       console.log(payload);
@@ -51,4 +57,4 @@ export const usersSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { onStartLoading , onSelectUser , onUsersLoaded, onDeleteUser } = usersSlice.actions;
+export const { onStartLoading , onSelectUser , onUsersLoaded, onDeleteUser ,onStartFetchUser} = usersSlice.actions;

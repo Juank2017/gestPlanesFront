@@ -24,15 +24,15 @@ export const useUiStore = ()=>{
     }
     
     const openDialogEditar=(values)=>{
-        console.log(values);
-        dispatch(onOpenDialogEditar({valueEditar: values}));
+        
+        dispatch(onOpenDialogEditar(values));
 
     } 
     const closeDialogEditar = ()=>{
         dispatch(onCloseDialogEditar());
     }
     const cambiaValores = (values)=>{
-        console.log(values);
+      
         dispatch(onChangeValues(values))
     } 
 

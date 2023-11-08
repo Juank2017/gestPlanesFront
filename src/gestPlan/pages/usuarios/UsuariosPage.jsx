@@ -4,7 +4,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 import { useUsersStore } from "../../../hooks/useUsersStore";
 import { IconButton, LinearProgress, Snackbar, Typography, Button } from "@mui/material";
-import  Close  from "@mui/icons-material/esm/Close";
+import Close from "@mui/icons-material/esm/Close";
 import { TablaUsuarios } from "./TablaUsuarios";
 import { useUiStore } from "../../../hooks/useUiStore";
 import { DialogBorrar } from "./DialogBorrar";
@@ -26,7 +26,7 @@ export const UsuariosPage = () => {
   }, []);
 
 
-  
+
   // const handleClose = (value) => {
   //   setIsOpen(false);
   //   if (value) {
@@ -41,7 +41,7 @@ export const UsuariosPage = () => {
     },
     [],
   )
-  
+
 
   const handleCloseSnack = (reason, event) => {
     console.log(reason);
@@ -75,22 +75,15 @@ export const UsuariosPage = () => {
         <Grid2>
           <Grid2 mb={1} display={'flex'} direction={'row'} justifyContent={'space-between'}>
 
-          <Typography variant={"h5"} mb={2}>Listado de usuarios.</Typography>
-          <Button size="small"  color={'primary'}> Nuevo usuario</Button>
+            <Typography variant={"h5"} mb={2}>Listado de usuarios.</Typography>
+            <Button size="small" color={'primary'}> Nuevo usuario</Button>
           </Grid2>
           {tabla(usuarios)}
         </Grid2>
       </Grid2>
-      <DialogBorrar
+      <DialogBorrar />
 
-      ></DialogBorrar>
-           
-                     <DialogEditar
-                      
-                     
-                      
-                     />
-                   
+      <DialogEditar />
 
       <Snackbar
         open={isSnackBarOpen}

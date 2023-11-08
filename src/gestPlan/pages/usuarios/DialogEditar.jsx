@@ -13,33 +13,29 @@ import {
 import { Stack } from "@mui/system";
 import { useSelector } from "react-redux";
 import { useUiStore } from "../../../hooks/useUiStore";
-import { CheckBox } from "@mui/icons-material";
+
 import { useState } from "react";
 import { useUsersStore } from "../../../hooks/useUsersStore";
 
 export const DialogEditar = () => {
   const { isDialogEditarOpen, valueEditar } = useSelector((state) => state.ui);
   const { roles } = useSelector((state) => state.users);
-  const { cambiaValores,closeDialogEditar } = useUiStore();
+  const { cambiaValores, closeDialogEditar } = useUiStore();
   const [checked, setChecked] = useState(valueEditar.enabled);
-  const {editUser} = useUsersStore();
-  // const handleCloseEditar = (value) => {
-  //   // setIsOpenEditar(false);
-  //   // if (value) {
-  //   //   deleteUser(value);
-  //   // }
-  // };
+  const { editUser } = useUsersStore();
+
   const handleCancel = (event) => {
     console.log(event)
     closeDialogEditar();
   };
 
   const handleOk = (event) => {
-    //onClose(valueEditar);
+    
     console.log(event);
     editUser(valueEditar);
   };
-  const onChangeValues = ( {target} ) => {
+
+  const onChangeValues = ({ target }) => {
     console.log(target)
     let nombre = target.name;
     let value = target.value;
@@ -92,6 +88,8 @@ export const DialogEditar = () => {
               label="Activo"
             />
           </Stack>
+
+
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleCancel}>
