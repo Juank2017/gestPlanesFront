@@ -5,13 +5,14 @@ import {
   onUsersLoaded,
   onStartFetchUser
 } from "../store/slices/usersSlice/usersSlice";
-
+import Swal from 'sweetalert2';
 import { useCallback, useState } from "react";
 
 import { useAuthStore } from "./useAuthStore";
 import { useUiStore } from "./useUiStore";
 
 import { planesAPI } from "../API/planesAPI";
+import { onCloseDialogCrear, onOpenSnackBar } from "../store/slices/ui/uiSlice";
 
 export const useUsersStore = () => {
 
@@ -19,7 +20,7 @@ export const useUsersStore = () => {
     (state) => state.users
   );
 
-  const { openSnackBar, closeDialogEditar, closeDialogBorrar, openDialogEditar } = useUiStore();
+  const { openSnackBar, closeDialogEditar, closeDialogBorrar, openDialogEditar,closeDialogCrear } = useUiStore();
   const { startLogout } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditar, setIsOpenEditar] = useState(false);
@@ -34,9 +35,8 @@ export const useUsersStore = () => {
 
     try {
 
-      const { data } = await planesAPI.get("/usuarios", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await planesAPI.get("/usuarios"
+      );
 
       const usuarios = data.payload[0].filter(
         (u) => u.deleted === false && u.userName != "admin"
@@ -58,7 +58,7 @@ export const useUsersStore = () => {
       dispatch(onUsersLoaded({ usuarios, roles, mensaje }));
     } catch (error) {
       console.log(error);
-      const response = error.response.data;
+     // const response = error.response.data;
 
     }
   };
@@ -69,10 +69,7 @@ export const useUsersStore = () => {
     try {
       const respuesta = await planesAPI
 
-        .delete(`/borraUsuario/${id}`, {
-
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        .delete(`/borraUsuario/${id}`)
         .then((datos) => {
 
           closeDialogBorrar();
@@ -142,6 +139,52 @@ export const useUsersStore = () => {
     }
   }
 
+  const existeUsuario = async (values)=>{
+
+    console.log(values);
+    const {userName} = values;
+    try {
+
+      //comprobar si existe el usuario
+      const respuesta = await planesAPI.get(`/existeUsuario/${userName}`).then(
+        ({data})=>{
+          console.log(data.payload[0]);
+          if (data.payload[0]  ){
+            openSnackBar(data.mensaje);
+            //Swal.fire(data.mensaje, errorMessage, 'error');
+          }else{
+            crearUsuario(values);
+           
+          }
+        }
+      )
+      
+    } catch (error) {
+      
+    }
+
+  }
+
+  const crearUsuario = async (values)=>{
+    
+      try {
+        const {data} = await planesAPI.post('crearUsuario',values);
+          
+          
+          closeDialogCrear();
+          openSnackBar(data.mensaje);
+      
+         startLoading();
+  
+
+      
+  
+      } catch (error) {
+        
+      }
+    }
+  
+  
 
   // const startDeleting = useCallback(
   //   (id) => () => {
@@ -163,7 +206,8 @@ export const useUsersStore = () => {
     startLoading,
     editUser,
     deleteUser,
-    startDeleting,
+    crearUsuario,
+    existeUsuario,
     value,
     isOpen,
     setIsOpen,

@@ -21,7 +21,7 @@ export const DialogEditar = () => {
   const { isDialogEditarOpen, valueEditar } = useSelector((state) => state.ui);
   const { roles } = useSelector((state) => state.users);
   const { cambiaValores, closeDialogEditar } = useUiStore();
-  const [checked, setChecked] = useState(valueEditar.enabled);
+  const [checked, setChecked] = useState(valueEditar?.enabled || false);
   const { editUser } = useUsersStore();
 
   const handleCancel = (event) => {

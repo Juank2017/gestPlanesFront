@@ -4,7 +4,7 @@ import { useAuthStore } from '../../hooks';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { Button, Card, CardContent, CardHeader, CardMedia, Stack, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-
+import imgUrl from '../../assets/escudo1.jpg';
 // const loginFormFields = {
 //   loginUserName:    '',
 //   loginPassword: '',
@@ -53,7 +53,7 @@ export const LoginPage = () => {
             <Grid2 display={'flex'} justifyContent={'center'}>
             <CardMedia
               component={'img'}
-              image='/public/img/escudo1.jpg'
+              image={imgUrl}
               
               sx={{width: '209px', height: '213px'}}
             ></CardMedia>

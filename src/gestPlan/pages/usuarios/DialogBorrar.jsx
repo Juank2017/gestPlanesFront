@@ -33,8 +33,3 @@ export const DialogBorrar = () => {
    </>
   )
 }
-DialogBorrar.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired,
-    value: PropTypes.string.isRequired,
-  };

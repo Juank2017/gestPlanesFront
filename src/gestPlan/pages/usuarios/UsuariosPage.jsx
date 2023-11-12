@@ -9,6 +9,7 @@ import { TablaUsuarios } from "./TablaUsuarios";
 import { useUiStore } from "../../../hooks/useUiStore";
 import { DialogBorrar } from "./DialogBorrar";
 import { DialogEditar } from "./DialogEditar";
+import { DialogCrear } from "./DialogCrear";
 
 export const UsuariosPage = () => {
   const {
@@ -16,6 +17,7 @@ export const UsuariosPage = () => {
     closeSnackBar,
     mensajeSnackBar,
     openDialogEditar,
+    openDialogCrear,
     valueEditar,
     isDialogEditarOpen
   } = useUiStore();
@@ -42,6 +44,9 @@ export const UsuariosPage = () => {
     [],
   )
 
+  const handleCrearUsuario = () => {
+    openDialogCrear();
+  }
 
   const handleCloseSnack = (reason, event) => {
     console.log(reason);
@@ -76,7 +81,7 @@ export const UsuariosPage = () => {
           <Grid2 mb={1} display={'flex'} direction={'row'} justifyContent={'space-between'}>
 
             <Typography variant={"h5"} mb={2}>Listado de usuarios.</Typography>
-            <Button size="small" color={'primary'}> Nuevo usuario</Button>
+            <Button size="small" color={'primary'} onClick={handleCrearUsuario}> Nuevo usuario</Button>
           </Grid2>
           {tabla(usuarios)}
         </Grid2>
@@ -84,7 +89,7 @@ export const UsuariosPage = () => {
       <DialogBorrar />
 
       <DialogEditar />
-
+      <DialogCrear />
       <Snackbar
         open={isSnackBarOpen}
         autoHideDuration={6000}

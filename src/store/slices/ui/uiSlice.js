@@ -7,12 +7,14 @@ export const uiSlice = createSlice({
         mensajeSnackBar: "",
         isDialogEditarOpen: false,
         isDialogBorrarOpen: false,
+        isDialogCrearOpen: false,
         valueEditar:{
             deleted:false,
-            enabled: undefined,
+            enabled: false,
             id: "",
             roles: "",
-            userName: ""
+            userName: "",
+            password:"",
         },
     },
     reducers: {
@@ -63,12 +65,35 @@ export const uiSlice = createSlice({
             userName: ""
         };         
        },
+       onOpenDialogCrear:(state)=>{
+        state.isSnackBarOpen= false;
+        state.mensajeSnackBar= "";
+        state.isDialogEditarOpen= false;
+        state.isDialogBorrarOpen= false;
+        state.isDialogCrearOpen= true;
+       // state.valueEditar=payload.valueEditar; 
+       },
+       onCloseDialogCrear:(state)=>{
+        state.isSnackBarOpen= false;
+        state.mensajeSnackBar= "";
+        state.isDialogEditarOpen= false;
+        state.isDialogBorrarOpen= false;
+        state.isDialogCrearOpen= false;
+        state.valueEditar={
+            deleted:false,
+            enabled: undefined,
+            id: "",
+            roles: "",
+            userName: ""
+        };         
+       },       
         onChangeValues:(state,{payload})=>{
             console.log(payload);
-            state.isSnackBarOpen= false;
-            state.mensajeSnackBar = "";
-            state.isDialogEditarOpen= true;
+            // state.isSnackBarOpen= false;
+            // state.mensajeSnackBar = "";
+            // state.isDialogEditarOpen= true;
             state.valueEditar= payload; 
+            
         }
 
 
@@ -86,5 +111,7 @@ export const {
     onOpenDialogEditar,
     onChangeValues,
     onOpenDialogBorrar,
-    onCloseDialogBorrar
+    onCloseDialogBorrar,
+    onOpenDialogCrear,
+    onCloseDialogCrear
      } = uiSlice.actions;

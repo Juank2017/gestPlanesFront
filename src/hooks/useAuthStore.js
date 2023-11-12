@@ -29,7 +29,7 @@ export const useAuthStore = () => {
       // redirect('/');
     } catch (error) {
       console.log(error);
-      dispatch(onLogout(error.response.data.mensaje));
+      dispatch(onLogout(error.message));
       setTimeout(() => {
         dispatch(clearErrorMessage());
       }, 10);
