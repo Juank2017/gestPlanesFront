@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/slices/atuhSlice/authSlices";
+import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store/slices/authSlices";
 
 import { planesAPI } from "../API/planesAPI";
 
@@ -25,7 +25,11 @@ export const useAuthStore = () => {
       });
       localStorage.setItem("user", data.userName);
       localStorage.setItem("roles", rolesUsuario);
-      dispatch(onLogin({ name: data.userName, roles: rolesUsuario }));
+      const respuesta = await planesAPI.get('/planActivo');
+      console.log(respuesta.data.payload);
+      const idPlan = respuesta.data.payload[0].idPlan;
+      localStorage.setItem("idPlan",idPlan);
+      dispatch(onLogin({ name: data.userName, roles: rolesUsuario, idPlan: idPlan }));
       // redirect('/');
     } catch (error) {
       console.log(error);

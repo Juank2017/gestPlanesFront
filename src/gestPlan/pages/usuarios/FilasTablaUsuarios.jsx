@@ -8,7 +8,7 @@ import { useMemo, useState } from "react";
 import { useUiStore } from "../../../hooks/useUiStore";
 import { useUsersStore } from "../../../hooks/useUsersStore";
 import { useDispatch } from "react-redux";
-import { onStartFetchUser } from "../../../store/slices/usersSlice/usersSlice";
+import { onStartFetchUser } from "../../../store/slices/usersSlice";
 
 
 export const FilasTablaUsuarios = ({

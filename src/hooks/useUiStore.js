@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onChangeValues, onCloseDialogEditar, onCloseSnackBar, onOpenDialogBorrar, onOpenDialogEditar, onOpenSnackBar,onCloseDialogBorrar, onCloseDialogCrear, onOpenDialogCrear } from "../store/slices/ui/uiSlice";
+import { onChangeValues, onCloseDialogEditar, onCloseSnackBar, onOpenDialogBorrar, onOpenDialogEditar, onOpenSnackBar,onCloseDialogBorrar, onCloseDialogCrear, onOpenDialogCrear } from "../store/slices/uiSlice";
 
 
 

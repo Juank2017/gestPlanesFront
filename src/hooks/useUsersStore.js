@@ -4,7 +4,7 @@ import {
   onStartLoading,
   onUsersLoaded,
   onStartFetchUser
-} from "../store/slices/usersSlice/usersSlice";
+} from "../store/slices/usersSlice";
 import Swal from 'sweetalert2';
 import { useCallback, useState } from "react";
 
@@ -12,7 +12,7 @@ import { useAuthStore } from "./useAuthStore";
 import { useUiStore } from "./useUiStore";
 
 import { planesAPI } from "../API/planesAPI";
-import { onCloseDialogCrear, onOpenSnackBar } from "../store/slices/ui/uiSlice";
+import { onCloseDialogCrear, onOpenSnackBar } from "../store/slices/uiSlice";
 
 export const useUsersStore = () => {
 
