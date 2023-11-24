@@ -6,12 +6,7 @@ import { Outlet } from 'react-router-dom'
 
 export const IndexPage = () => {
 
-  const {cargarSalarios} = useContratoStore();
-  useEffect(() => {
-    cargarSalarios(localStorage.getItem('idPlan'));
-  
-    
-  }, [])
+
   return (
     <>
         <NavBar/>

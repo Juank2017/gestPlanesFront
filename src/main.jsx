@@ -12,12 +12,13 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { store } from './store/store';
 import React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { es } from 'date-fns/locale';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import 'moment/locale/es';
+import moment from 'moment-timezone';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={es}>
+    <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale='es'>
       <Provider store={store} >
         <HashRouter>
           <GestPlanApp />
