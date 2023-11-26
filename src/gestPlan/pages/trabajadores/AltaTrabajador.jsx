@@ -1,20 +1,42 @@
-import { Padding } from '@mui/icons-material'
-import { Button, Card, CardContent, FormControl, FormHelperText, InputLabel, LinearProgress, MenuItem, Select, TextField, Typography } from '@mui/material'
+
+import {  FormControl, FormHelperText, IconButton, InputLabel, MenuItem, Select, Snackbar, TextField } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { Stack } from '@mui/system'
-import { DesktopDatePicker } from '@mui/x-date-pickers'
-import React, { useEffect, useState } from 'react'
+
+import { useEffect, useState } from 'react'
 import { DatosPersonales } from './DatosPersonales'
 import { DatosContrato } from './DatosContrato'
 import { DatosEconomicos } from './DatosEconomicos'
-import { useContratoStore } from '../../../hooks/useContratoStore'
-import { Formik, useFormik, useFormikContext } from 'formik'
+
+import { Formik } from 'formik'
 import { planesAPI } from '../../../API/planesAPI'
+import Close from '@mui/icons-material/esm/Close'
+import { useUiStore } from '../../../hooks/useUiStore'
 
-//import moment from 'moment';
-import moment from 'moment-timezone';
+
+
 export const AltaTrabajador = () => {
-
+    const { isSnackBarOpen,openSnackBar, closeSnackBar, mensajeSnackBar } =
+    useUiStore();
+    const handleCloseSnack = (reason, event) => {
+        console.log(reason);
+        console.log(event);
+        if (reason === "clickaway") {
+          return;
+        }
+        closeSnackBar();
+      };
+      const action = (
+        <>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnack}
+          >
+            <Close fontSize="small" />
+          </IconButton>
+        </>
+      );
     const validateDNI = (dni) => {
         var numero, let_, letra;
         var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
@@ -55,7 +77,7 @@ export const AltaTrabajador = () => {
 
     }, [])
 
-    const validate = (values, props /* only available when using withFormik */) => {
+    const validate = (values) => {
         const errors = {};
 
         if (!values.fechaRegistro) {
@@ -116,7 +138,7 @@ export const AltaTrabajador = () => {
                     sexo: "",
                     DNI: "",
                     seguridadSocial: "",
-                    fechaNacimiento: moment(),
+                    fechaNacimiento: "",
                     ccc: "",
                     estado: "",
                     email: "",
@@ -126,8 +148,8 @@ export const AltaTrabajador = () => {
                     categoria: "",
                     ocu: "",
                     duracion: "",
-                    fechaInicio: moment(),
-                    fechaFinal: moment(),
+                    fechaInicio: "",
+                    fechaFinal: "",
                     turno: "",
                     entidad: "",
                     destino: "",
@@ -135,14 +157,24 @@ export const AltaTrabajador = () => {
 
 
                 }}
-                onSubmit={(values, actions) => {
+                validateOnChange={false}
+                onSubmit={async(values, actions) => {
                     console.log(JSON.stringify(values, null, 2));
                     console.log(actions);
-                    console.log(isSubmitting);
+                    const idPlan= localStorage.getItem("idPlan");
+                    await planesAPI.post(`/crearTrabajador/${idPlan}`,values).then(({data})=>{
+                        console.log(data);
+                        openSnackBar(data.mensaje);
+                        actions.resetForm();
+                    }).catch((error)=>{
+                        console.log(error);
+                        openSnackBar(error);
+                    })
+                    
                 }}
                 validate={validate}
             >
-                {props => (
+                {(props) => (
                     <form onSubmit={props.handleSubmit}>
                         <Grid2 container marginX={"auto"} width={"100%"}>
 
@@ -201,7 +233,13 @@ export const AltaTrabajador = () => {
                 )}
             </Formik>
 
-
+            <Snackbar
+            open={isSnackBarOpen}
+            autoHideDuration={6000}
+            onClose={handleCloseSnack}
+            message={mensajeSnackBar}
+            action={action}
+          />
 
         </>
 

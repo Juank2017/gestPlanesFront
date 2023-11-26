@@ -1,5 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onChangeValues, onCloseDialogEditar, onCloseSnackBar, onOpenDialogBorrar, onOpenDialogEditar, onOpenSnackBar,onCloseDialogBorrar, onCloseDialogCrear, onOpenDialogCrear } from "../store/slices/uiSlice";
+import { onChangeValues,
+         onCloseDialogEditar, 
+         onCloseSnackBar, 
+         onOpenDialogBorrar, 
+         onOpenDialogEditar, 
+         onOpenSnackBar,
+         onCloseDialogBorrar, 
+         onCloseDialogCrear, 
+         onOpenDialogCrear,
+         onOpenDialogDestino,
+         onCloseDialogDestino,
+         onChangeNuevoDestino } from "../store/slices/uiSlice";
 
 
 
@@ -52,6 +63,18 @@ export const useUiStore = ()=>{
         dispatch(onCloseDialogCrear());
     }
 
+    const openDialogDestino = ()=>{
+        dispatch(onOpenDialogDestino());
+
+    }
+
+    const closeDialogDestino = ()=>{
+        dispatch(onCloseDialogDestino());
+    }
+
+    const cambiaValorDestino = (values)=>{
+        dispatch(onChangeNuevoDestino(values));
+    }
 
     
 
@@ -68,6 +91,9 @@ export const useUiStore = ()=>{
         closeDialogBorrar,
         cambiaValores,
         openDialogCrear,
-        closeDialogCrear
+        closeDialogCrear,
+        openDialogDestino,
+        closeDialogDestino,
+        cambiaValorDestino
     }
 }

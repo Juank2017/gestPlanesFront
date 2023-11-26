@@ -8,6 +8,7 @@ export const uiSlice = createSlice({
         isDialogEditarOpen: false,
         isDialogBorrarOpen: false,
         isDialogCrearOpen: false,
+        isDialogDestinoOpen: false,
         valueEditar:{
             deleted:false,
             enabled: false,
@@ -16,6 +17,10 @@ export const uiSlice = createSlice({
             userName: "",
             password:"",
         },
+        nuevoDestino:{
+            destino:"",
+            organismo: ""
+        }
     },
     reducers: {
         onOpenSnackBar:(state,{payload})=>{
@@ -86,7 +91,23 @@ export const uiSlice = createSlice({
             roles: "",
             userName: ""
         };         
-       },       
+       },  
+       onOpenDialogDestino:(state)=>{
+        state.isSnackBarOpen= false;
+        state.mensajeSnackBar= "";
+        state.isDialogDestinoOpen= true;
+       }, 
+       onCloseDialogDestino:(state)=>{
+        state.isDialogDestinoOpen= false;
+        state.nuevoDestino={
+            destino:"",
+            organismo:""
+        }
+       },
+       onChangeNuevoDestino:(state,{payload})=>{
+        console.log(payload);
+        state.nuevoDestino= payload;
+       },    
         onChangeValues:(state,{payload})=>{
             console.log(payload);
             // state.isSnackBarOpen= false;
@@ -113,5 +134,8 @@ export const {
     onOpenDialogBorrar,
     onCloseDialogBorrar,
     onOpenDialogCrear,
-    onCloseDialogCrear
+    onCloseDialogCrear,
+    onOpenDialogDestino,
+    onCloseDialogDestino,
+    onChangeNuevoDestino
      } = uiSlice.actions;

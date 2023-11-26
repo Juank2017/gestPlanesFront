@@ -1,14 +1,12 @@
 import { Card, CardContent, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { DesktopDatePicker } from '@mui/x-date-pickers'
-import { useFormikContext, validateYupSchema } from 'formik'
-import React from 'react'
+
+import { useFormikContext } from 'formik'
+
 
 export const DatosPersonales = () => {
 
-
-
-    const { values, setFieldValue, handleChange, errors } = useFormikContext()
+    const { values,  handleChange, errors } = useFormikContext()
 
     console.log(errors);
     return (
@@ -32,14 +30,14 @@ export const DatosPersonales = () => {
                                     label="Nombre"
                                     variant='standard'
                                     size='small'
-                                    value={values.nombre}
+                                    value={values.nombre.toUpperCase()}
                                     onChange={handleChange}
                                     error={errors.nombre}
                                     helperText={errors.nombre}
 
                                 />
                                 <TextField
-                                    value={values.apellido1}
+                                    value={values.apellido1.toUpperCase()}
                                     onChange={handleChange}
                                     name="apellido1"
                                     id="apellido1"
@@ -51,7 +49,7 @@ export const DatosPersonales = () => {
                                     helperText={errors.apellido1}
                                     />
                                 <TextField
-                                    value={values.apellido2}
+                                    value={values.apellido2.toUpperCase()}
                                     onChange={handleChange}
                                     name="apellido2"
                                     id="apellido2"
@@ -76,13 +74,13 @@ export const DatosPersonales = () => {
                                         helperText={errors.sexo}
                                     >
 
-                                        <MenuItem key="H" value="Hombre" >Hombre</MenuItem>
-                                        <MenuItem key="M" value="Mujer" >Mujer</MenuItem>
+                                        <MenuItem key="H" value="HOMBRE" >HOMBRE</MenuItem>
+                                        <MenuItem key="M" value="MUJER" >MUJER</MenuItem>
                                     </Select>
                                     <FormHelperText>{errors.sexo}</FormHelperText>
                                 </FormControl>
                                 <TextField
-                                    value={values.DNI}
+                                    value={values.DNI.toUpperCase()}
                                     onChange={handleChange}
                                     name="DNI"
                                     id="DNI"
@@ -121,7 +119,7 @@ export const DatosPersonales = () => {
                                         label="F. nacimiento."
                                         variant='standard'
                                         size='small'
-
+                                        InputLabelProps={{ shrink: true }}
                                     />
                                 </FormControl>
                                 <TextField
@@ -155,7 +153,7 @@ export const DatosPersonales = () => {
                                     variant='standard'
                                     size='small'
                                     sx={{ width: "400px" }}
-                                    value={values.ccc}
+                                    value={values.ccc.toUpperCase()}
                                     onChange={handleChange}
                                 />
                             </Grid2>

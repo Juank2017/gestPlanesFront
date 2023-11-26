@@ -2,13 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 export const trabajadoresSlice = createSlice({
 name: 'trabajadores',
 initialState: {
+    isLoading: false,
     trabajadores:[],
     trabajadorActual:{}
 },
 reducers: {
-reducer: (state, /* action */ ) => {
+onStartLoading: (state, /* action */ ) => {
+    state.isLoading= true;
 },
+onTrabajadoresLoaded:(state,{payload})=>{
+    console.log(payload);
+    state.isLoading= false;
+    state.trabajadores= payload;
+}
 }
 });
 // Action creators are generated for each case reducer function
-export const { /*action */ } = trabajadoresSlice.actions;
+export const { onStartLoading, onTrabajadoresLoaded } = trabajadoresSlice.actions;
