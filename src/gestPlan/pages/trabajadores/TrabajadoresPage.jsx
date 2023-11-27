@@ -1,10 +1,7 @@
 
 import { useEffect } from 'react';
 import { useTrabajadoresStore } from '../../../hooks/useTrabajadoresStore'
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from 'material-react-table';
+
 
 export const TrabajadoresPage = () => {
 
